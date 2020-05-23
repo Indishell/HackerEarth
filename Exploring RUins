@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+ 
+ 
+string getLowestString(string s)
+{
+ 
+	//Condition When string is of length 1
+	if (s.size() == 1 && s[0] == '?')
+		s[0] =  'a';
+	
+ 
+	if (s[0] == '?' && s[1] == 'a')
+		s[0] = 'b';
+ 
+	if (s[0] == '?' && s[1] == 'b')
+		s[0] = 'a';
+ 
+	if(s[0] == '?' && s[1] == '?')
+		s[0] = 'a';
+	
+	for (int i = 1; i < s.size(); i++)
+	{
+ 
+		if (s[i] == '?' && s[i - 1] == 'b')
+		{
+			if (s[i + 1] == 'a')
+				s[i] = 'b';
+ 
+			else if (s[i + 1] == 'b')
+				s[i] = 'a';
+ 
+			else if (i == s.size() - 1)
+				s[i] = 'a';
+ 
+			else if (s[i + 1] == '?')
+				s[i] = 'a';
+		}
+ 
+		else if (s[i] == '?' && s[i - 1] == 'a')
+		{
+			s[i] = 'b';
+		}
+	}
+ 
+	return s;
+}
+ 
+ 
+ 
+ 
+int main()
+{
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+ 
+	fastIO
+ 
+	string s;
+	getline(cin, s);
+ 
+	cout << getLowestString(s);
+}
